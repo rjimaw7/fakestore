@@ -22,6 +22,8 @@ import Testimonial3 from '@assets/Testimonial3.png';
 import News1 from '@assets/News1.png';
 import News2 from '@assets/News2.png';
 import { Footer } from '@components/Footer';
+import SmallCart from '@assets/SmallCart';
+import View from '@assets/View';
 
 interface Props {
   data?: IProducts[];
@@ -48,15 +50,20 @@ const MainView = ({
   return (
     <>
       <Hero />
-      <ProductItemsCount />
+      <ProductItemsCount onFilter={onFilter} />
 
       {/* POPULAR PRODUCTS */}
 
-      <div className="mt-24 container mx-auto">
-        <div className="flex justify-between">
-          <h2 className="font-bold text-blue-900 text-3xl">Popular Products</h2>
+      <section id="popular-products" className=" md:mt-24 container mx-auto">
+        {/* <div className="flex justify-between"> */}
+        <div className="md:flex md:justify-between">
+          {/* <h2 className="font-bold text-blue-900 text-3xl">Popular Products</h2> */}
+          <h2 className="font-bold text-blue-900 text-2xl text-center p-5 md:p-0 lg:p-0">
+            Popular Products
+          </h2>
 
-          <div className="flex gap-2 items-center mb-8">
+          {/* <div className="flex gap-2 items-center mb-8"> */}
+          <div className="grid grid-cols-1 gap-2 p-5 md:flex md:p-0">
             <Button
               name="electronics"
               size="large"
@@ -93,7 +100,7 @@ const MainView = ({
         </div>
 
         {!loading && (
-          <div className="flex justify-center">
+          <div className="flex justify-center md:justify-end mt-6">
             <Pagination
               current={page}
               pageSize={pageSize}
@@ -110,162 +117,111 @@ const MainView = ({
           </div>
         )}
 
-        <div className="mt-12 grid gap-4 grid-cols-4 grid-rows-2 relative justify-center items-center">
+        <div className="mt-12 p-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {loading ? (
             <Spin className="absolute top-0 left-0 right-0 bottom-0 m-auto" />
           ) : (
-            data?.map((item) => <Products item={item} />)
+            data?.map((item) => <Products item={item} key={item.id} />)
           )}
         </div>
-      </div>
+      </section>
 
       {/* LAPTOP */}
-      <div className="container mt-32 mx-auto relative">
+      {/* <div className="container mt-32 mx-auto relative"> */}
+      <div className="mt-10 container mx-auto p-5 relative">
         <img className="w-full" src={NewLaptop} alt="newLaptop" />
-
-        <div className="text-center absolute top-32 right-56 p-5">
-          <Button className="bg-yellow-500 text-white mb-12" size="large">
+        <div className="absolute right-20 top-7 text-center md:right-24 md:top-12 lg:right-60 lg:top-24">
+          <button
+            type="button"
+            className="bg-yellow-500 text-white rounded-full text-xs p-1 md:p-3 lg:p-4 lg:text-lg"
+          >
             New Laptop
-          </Button>
-
-          <h2 className="text-blue-600 font-bold text-4xl">
+          </button>
+          <h2 className="text-blue-400 text-xs mt-3 md:text-2xl lg:mt-8">
             Sale up to 50% off
           </h2>
-          <p className="text-white mt-2">12 inch hd display</p>
-
-          <Button className="bg-yellow-500 text-white mt-12" size="large">
+          <p className="text-xs text-white mb-3 md:text-lg lg:mb-8">
+            12 inch hd display
+          </p>
+          <button
+            type="button"
+            className="bg-yellow-500 text-white rounded-full text-xs p-1 md:p-3 lg:p-4 lg:text-lg"
+          >
             Shop Now
-          </Button>
+          </button>
         </div>
       </div>
 
       {/* OTHER PRODUCTS */}
-
       <section
         id="other-products"
-        className="container mx-auto mt-24 flex gap-8"
+        className="container mx-auto mt-4 p-5 grid grid-cols-1 grid-rows-1 gap-4 md:grid-cols-2 md:grid-rows-2"
       >
-        <div className="border border-gray-400 w-1/2 rounded-lg flex items-center gap-12">
-          <img src={OtherSpeaker} alt="otherSpeaker" />
-
+        <div className="border border-gray-400 rounded-lg flex items-center justify-center md:row-span-2">
           <div>
-            <h2 className="text-2xl font-bold text-blue-900">
+            <img src={OtherSpeaker} alt="otherSpeaker" />
+          </div>
+
+          <div className="mx-3">
+            <h2 className="text-1xl font-bold text-blue-900">
               JBL bar 2.1 deep bass
             </h2>
             <p className="font-bold my-3">$11,70</p>
             <Stars2 />
-            <div className="mt-3 flex gap-2">
-              <div className="w-20 h-20 bg-blue-100 rounded-full text-yellow-500 font-bold flex justify-center items-center">
+
+            {/* <div className="mt-3 flex gap-1 p-3"> */}
+            <div className="mt-3 flex gap-2 cursor-pointer">
+              <div className="w-10 h-10 bg-blue-100 rounded-full text-yellow-500 font-bold flex justify-center items-center">
                 57
               </div>
-              <div className="w-20 h-20 bg-blue-100 rounded-full text-yellow-500 font-bold  flex justify-center items-center">
+              <div className="w-10 h-10 bg-blue-100 rounded-full text-yellow-500 font-bold flex justify-center items-center">
                 11
               </div>
-              <div className="w-20 h-20 bg-blue-100 rounded-full text-yellow-500 font-bold  flex justify-center items-center">
+              <div className="w-10 h-10 bg-blue-100 rounded-full text-yellow-500 font-bold flex justify-center items-center">
                 33
               </div>
-              <div className="w-20 h-20 bg-blue-100 rounded-full text-yellow-500 font-bold  flex justify-center items-center">
+              <div className="w-10 h-10 bg-blue-100 rounded-full text-yellow-500 font-bold flex justify-center items-center">
                 59
               </div>
             </div>
-            <div className="mt-4 flex gap-6">
-              <Button
-                size="large"
-                className=" bg-blue-500 text-black w-1/2 font-semibold flex justify-between items-center"
+
+            <div className="mt-4 flex gap-2">
+              <button
+                type="button"
+                className=" bg-blue-300 text-black w-full h-12 font-semibold mb-2 flex justify-between items-center
+                rounded-lg p-1 lg:mb-0"
               >
-                <p>Add to Cart</p>
-                <svg
-                  width="31"
-                  height="31"
-                  viewBox="0 0 31 31"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect
-                    x="0.415375"
-                    y="0.31543"
-                    width="30.4897"
-                    height="30.4897"
-                    rx="15.2448"
-                    fill="#EDA415"
-                  />
-                  <path
-                    d="M8.48849 8.38867H9.73636C10.5109 8.38867 11.1205 9.05563 11.0559 9.823L10.4607 16.9659C10.3603 18.1349 11.2854 19.1389 12.4616 19.1389H20.0994C21.1321 19.1389 22.0357 18.2927 22.1146 17.2671L22.5018 11.8884C22.5879 10.6979 21.6843 9.72976 20.4866 9.72976H11.2281"
-                    stroke="white"
-                    strokeWidth="1.47531"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M18.7081 22.7319C19.2032 22.7319 19.6046 22.3305 19.6046 21.8354C19.6046 21.3403 19.2032 20.939 18.7081 20.939C18.213 20.939 17.8116 21.3403 17.8116 21.8354C17.8116 22.3305 18.213 22.7319 18.7081 22.7319Z"
-                    stroke="white"
-                    strokeWidth="1.47531"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M12.9708 22.7319C13.4659 22.7319 13.8673 22.3305 13.8673 21.8354C13.8673 21.3403 13.4659 20.939 12.9708 20.939C12.4757 20.939 12.0744 21.3403 12.0744 21.8354C12.0744 22.3305 12.4757 22.7319 12.9708 22.7319Z"
-                    stroke="white"
-                    strokeWidth="1.47531"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M13.5086 12.6917H22.1146"
-                    stroke="white"
-                    strokeWidth="1.47531"
-                    strokeMiterlimit="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Button>
-              <div className="border border-transparent cursor-pointer rounded-lg w-16 h-15 bg-blue-500 flex justify-center items-center">
-                <svg
-                  width="25"
-                  height="25"
-                  viewBox="0 0 25 25"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M16.1255 12.5604C16.1255 14.5078 14.5519 16.0814 12.6045 16.0814C10.6571 16.0814 9.0834 14.5078 9.0834 12.5604C9.0834 10.613 10.6571 9.03931 12.6045 9.03931C14.5519 9.03931 16.1255 10.613 16.1255 12.5604Z"
-                    stroke="#292D32"
-                    strokeWidth="1.47531"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M12.6045 20.694C16.0764 20.694 19.3123 18.6483 21.5646 15.1076C22.4497 13.7208 22.4497 11.3898 21.5646 10.003C19.3123 6.46226 16.0764 4.4165 12.6045 4.4165C9.13265 4.4165 5.89681 6.46226 3.64451 10.003C2.75933 11.3898 2.75933 13.7208 3.64451 15.1076C5.89681 18.6483 9.13265 20.694 12.6045 20.694Z"
-                    stroke="#292D32"
-                    strokeWidth="1.47531"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <p className="text-sm font-semibold">Add to Cart</p>
+                <SmallCart />
+              </button>
+              <div className="border border-transparent cursor-pointer mb-2 rounded-lg w-16 h-15 bg-blue-300 flex justify-center items-center lg:mb-0">
+                <View />
               </div>
             </div>
           </div>
         </div>
-        <div className="w-1/2 flex flex-col gap-4">
-          <div className="border border-gray-400 h-1/2 rounded-lg flex justify-evenly items-center">
-            <img src={OtherJoystick} alt="otherJoystick" />
-            <div>
-              <h2 className="font-semibold text-blue-900">Play game</h2>
-              <p className="my-2 font-bold">$11,70</p>
-              <Stars2 />
-            </div>
+
+        <div className="border border-gray-400 rounded-lg flex items-center justify-center">
+          <div>
+            <img src={OtherJoystick} alt="otherSpeaker" />
           </div>
-          <div className="border border-gray-400 h-1/2 rounded-lg flex justify-evenly items-center">
-            <img src={OtherLaptop} alt="otherLaptop" />
-            <div>
-              <h2 className="font-semibold text-blue-900">Play game</h2>
-              <p className="my-2 font-bold">$11,70</p>
-              <Stars2 />
-            </div>
+
+          <div className="mx-3">
+            <h2 className="text-1xl font-bold text-blue-900">Play Game</h2>
+            <p className="font-bold my-3">$11,70</p>
+            <Stars2 />
+          </div>
+        </div>
+
+        <div className="border border-gray-400 rounded-lg flex items-center justify-center">
+          <div>
+            <img src={OtherLaptop} alt="otherSpeaker" />
+          </div>
+
+          <div className="mx-3">
+            <h2 className="text-1xl font-bold text-blue-900">Play Game</h2>
+            <p className="font-bold my-3">$11,70</p>
+            <Stars2 />
           </div>
         </div>
       </section>
@@ -273,16 +229,16 @@ const MainView = ({
       {/* SHOWCASE */}
       <section
         id="showcase"
-        className="container mx-auto mt-24 flex justify-around items-center bg-blue-100 p-8 rounded-lg"
+        className="container mx-auto mt-24 block md:flex justify-around items-center bg-blue-100 p-8 rounded-lg"
       >
-        <div className="flex gap-6 items-center">
+        <div className="flex justify-center my-6 gap-6 items-center">
           <ShowCaseBox />
           <div className="flex flex-col">
             <h2 className="font-bold text-blue-900 text-2xl">Free Delivery</h2>
             <p className="font-semibold text-blue-900">on order above $50,00</p>
           </div>
         </div>
-        <div className="flex gap-6 items-center">
+        <div className="flex justify-center mb-5 gap-6 my-6 items-center">
           <ShowCaseCrown />
           <div className="flex flex-col">
             <h2 className="font-bold text-blue-900 text-2xl">Best Quality</h2>
@@ -291,7 +247,7 @@ const MainView = ({
             </p>
           </div>
         </div>
-        <div className="flex gap-6 items-center">
+        <div className="flex justify-center mb-5 gap-6 my-6 items-center">
           <ShowCaseShield />
           <div className="flex flex-col">
             <h2 className="font-bold text-blue-900 text-2xl">
@@ -304,9 +260,12 @@ const MainView = ({
 
       {/* TESTIMONIALS */}
 
-      <section id="testimonials" className="container mx-auto mt-24 flex gap-4">
-        <div className="border border-gray-400 rounded-lg p-5">
-          <div className="flex gap-12 items-center">
+      <section
+        id="testimonials"
+        className="container mx-auto mt-24 p-5 block md:flex gap-4"
+      >
+        <div className="border border-gray-400 mb-4 rounded-lg p-5 lg:mb-0">
+          <div className="flex gap-12 md:gap-6 items-center">
             <img
               className="border border-yellow-500 border-dashed rounded-full p-1"
               src={Testimonial1}
@@ -320,8 +279,8 @@ const MainView = ({
           </div>
         </div>
 
-        <div className="border border-gray-400 rounded-lg p-5">
-          <div className="flex gap-12 items-center">
+        <div className="border border-gray-400 mb-4 rounded-lg p-5 lg:mb-0">
+          <div className="flex gap-12 md:gap-6  items-center">
             <img
               className="border border-yellow-500 border-dashed rounded-full p-1"
               src={Testimonial2}
@@ -335,8 +294,8 @@ const MainView = ({
           </div>
         </div>
 
-        <div className="border border-gray-400 rounded-lg p-5">
-          <div className="flex gap-12 items-center">
+        <div className="border border-gray-400 mb-4 rounded-lg p-5 lg:mb-0">
+          <div className="flex gap-12 md:gap-6  items-center">
             <img
               className="border border-yellow-500 border-dashed rounded-full p-1"
               src={Testimonial3}
@@ -353,7 +312,10 @@ const MainView = ({
 
       {/* NEWS */}
 
-      <section id="news" className="container mx-auto mt-24 mb-24">
+      <section
+        id="news"
+        className="container mx-auto mt-6 md:mt-24 mb-24 p-5 lg:p-0"
+      >
         <div className="flex justify-between">
           <h2 className="font-bold text-blue-900 text-2xl">Latest News</h2>
           <p className="font-semibold text-blue-900 text-lg cursor-pointer">
@@ -361,14 +323,14 @@ const MainView = ({
           </p>
         </div>
 
-        <div className="flex mt-16 gap-8">
-          <div className="border border-gray-200 w-1/2">
-            <div className="p-5 mt-4 flex items-start">
-              <div className="w-1/2">
-                <img src={News1} alt="news1" />
+        <div className="block mt-8 md:flex md:mt-16 gap-8">
+          <div className="border border-gray-200 mb-4 md:mb-0 w-full md:w-1/2">
+            <div className="p-5 mt-4 flex md:block lg:flex gap-6 md:gap-0 items-center md:items-start">
+              <div className="w-full lg:w-1/2">
+                <img className="" src={News1} alt="news1" />
               </div>
-              <div className="w-1/2">
-                <p className="font-semibold border border-gray-200 rounded-full w-1/2 text-center py-2 text-blue-900 text-lg">
+              <div className="w-full lg:w-1/2">
+                <p className="font-semibold border border-gray-200 rounded-full md:hidden lg:block w-1/2 text-center py-2 text-blue-900 text-lg">
                   Jan 3, 2023
                 </p>
                 <h2 className="mt-2 font-bold text-blue-900 text-2xl">
@@ -387,13 +349,13 @@ const MainView = ({
             </div>
           </div>
 
-          <div className="border border-gray-200 w-1/2">
-            <div className="p-5 mt-4 flex items-start">
-              <div className="w-1/2">
-                <img src={News2} alt="news1" />
+          <div className="border border-gray-200 w-full md:w-1/2">
+            <div className="p-5 mt-4 flex md:block lg:flex gap-6 md:gap-0 items-center md:items-start">
+              <div className="w-full lg:w-1/2">
+                <img className="" src={News2} alt="news1" />
               </div>
-              <div className="w-1/2">
-                <p className="font-semibold border border-gray-200 rounded-full w-1/2 text-center py-2 text-blue-900 text-lg">
+              <div className="w-full lg:w-1/2">
+                <p className="font-semibold border border-gray-200 rounded-full md:hidden lg:block w-1/2 text-center py-2 text-blue-900 text-lg">
                   Jan 1, 2023
                 </p>
                 <h2 className="mt-2 font-bold text-blue-900 text-2xl">
