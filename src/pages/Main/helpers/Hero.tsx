@@ -3,7 +3,17 @@ import Hero1 from '@assets/Hero1.png';
 import Hero2 from '@assets/Hero2.png';
 import Hero3 from '@assets/Hero3.png';
 
-const Hero = () => {
+interface Props {
+  elementRef: React.RefObject<HTMLDivElement>;
+}
+
+const Hero = ({ elementRef }: Props) => {
+  const handleClick = () => {
+    if (elementRef.current) {
+      elementRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="hero" className="container mx-auto">
       <Carousel autoplay dotPosition="top">
@@ -17,6 +27,7 @@ const Hero = () => {
 
                 <div className="mt-8 flex flex-col gap-4 font-semibold md:flex-row lg:justify-start md:justify-center">
                   <button
+                    onClick={handleClick}
                     type="button"
                     className="rounded-3xl border border-transparent mx-auto w-96 h-12 md:p-5 md:w-32 md:h-16 md:mx-0 bg-yellow-500 text-white"
                   >
@@ -48,6 +59,7 @@ const Hero = () => {
 
                 <div className="mt-8 flex flex-col gap-4 font-semibold md:flex-row lg:justify-start md:justify-center">
                   <button
+                    onClick={handleClick}
                     type="button"
                     className="rounded-3xl border border-transparent mx-auto w-96 h-12 md:p-5 md:w-32 md:h-16 md:mx-0 bg-yellow-500 text-white"
                   >
@@ -79,6 +91,7 @@ const Hero = () => {
 
                 <div className="mt-8 flex flex-col gap-4 font-semibold md:flex-row lg:justify-start md:justify-center">
                   <button
+                    onClick={handleClick}
                     type="button"
                     className="rounded-3xl border border-transparent mx-auto w-96 h-12 md:p-5 md:w-32 md:h-16 md:mx-0 bg-yellow-500 text-white"
                   >

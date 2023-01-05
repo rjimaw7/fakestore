@@ -24,6 +24,7 @@ import News2 from '@assets/News2.png';
 import { Footer } from '@components/Footer';
 import SmallCart from '@assets/SmallCart';
 import View from '@assets/View';
+import { useRef } from 'react';
 
 interface Props {
   data?: IProducts[];
@@ -47,22 +48,25 @@ const MainView = ({
   productsAllCount,
   onFilter,
 }: Props) => {
+  const elementRef = useRef<HTMLDivElement>(null);
+
   return (
     <>
-      <Hero />
+      <Hero elementRef={elementRef} />
       <ProductItemsCount onFilter={onFilter} />
 
       {/* POPULAR PRODUCTS */}
 
-      <section id="popular-products" className=" md:mt-24 container mx-auto">
-        {/* <div className="flex justify-between"> */}
+      <section
+        id="popular-products"
+        ref={elementRef}
+        className=" md:mt-24 container mx-auto"
+      >
         <div className="md:flex md:justify-between">
-          {/* <h2 className="font-bold text-blue-900 text-3xl">Popular Products</h2> */}
           <h2 className="font-bold text-blue-900 text-2xl text-center p-5 md:p-0 lg:p-0">
             Popular Products
           </h2>
 
-          {/* <div className="flex gap-2 items-center mb-8"> */}
           <div className="grid grid-cols-1 gap-2 p-5 md:flex md:p-0">
             <Button
               name="electronics"
@@ -127,7 +131,6 @@ const MainView = ({
       </section>
 
       {/* LAPTOP */}
-      {/* <div className="container mt-32 mx-auto relative"> */}
       <div className="mt-10 container mx-auto p-5 relative">
         <img className="w-full" src={NewLaptop} alt="newLaptop" />
         <div className="absolute right-20 top-7 text-center md:right-24 md:top-12 lg:right-60 lg:top-24">

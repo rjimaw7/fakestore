@@ -41,7 +41,7 @@ const Footer = () => {
             <p className="italic text-md text-blue-900 mt-4">
               1808 Ross Street, Okawville Illinois
             </p>
-            <div className="border border-t-1 border-t-gray-500 mt-4 cursor-pointer mb-4 md:mb-0">
+            <div className="border border-t-1 border-t-gray-500 md:border-t-0 mt-4 cursor-pointer mb-4 md:mb-0">
               <div className="flex justify-start gap-6 mt-4">
                 <FooterSocial />
               </div>
