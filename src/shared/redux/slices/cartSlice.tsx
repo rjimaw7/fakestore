@@ -1,14 +1,18 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
+import { IProducts } from '@shared/interfaces/IProducts';
 
-export interface CounterState {
+export interface CartState {
   value: number;
+  cart: IProducts[];
 }
 
-const initialState: CounterState = {
+const initialState = {
   value: 0,
-};
+  cart: [],
+} as CartState;
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -24,13 +28,20 @@ export const cartSlice = createSlice({
     decrement: (state) => {
       state.value -= 1;
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
+    addToCart(state, action: PayloadAction<IProducts>) {
+      const itemInCart = state.cart.find(
+        (item) => item.id === action.payload.id
+      );
+
+      if (!itemInCart) {
+        // Add the item to the cart array
+        state.cart.push(action.payload);
+      }
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = cartSlice.actions;
+export const { increment, decrement, addToCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

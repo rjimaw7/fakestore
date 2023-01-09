@@ -1,13 +1,12 @@
 import React from 'react';
 import CheckoutView from './CheckoutView';
-import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { RootState } from '@shared/redux/store';
 
 const CheckoutContainer = () => {
-  const location = useLocation();
+  const cart = useSelector((state: RootState) => state.cart.cart);
 
-  const checkOutData = [location.state.data];
-
-  return <CheckoutView data={checkOutData} />;
+  return <CheckoutView data={cart} />;
 };
 
 export default CheckoutContainer;

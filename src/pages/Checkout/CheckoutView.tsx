@@ -2,6 +2,10 @@ import { IProducts } from '@shared/interfaces/IProducts';
 import CheckOutItems from './CheckOutItems';
 import { DownOutlined } from '@ant-design/icons';
 import { Footer } from '@components/Footer';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '@shared/redux/store';
+import { Link } from 'react-router-dom';
 
 interface Props {
   data: IProducts[];
@@ -9,6 +13,14 @@ interface Props {
 
 const CheckoutView = ({ data }: Props) => {
   const tableData = data;
+
+  const cart = useSelector((state: RootState) => state.cart.cart);
+
+  const totalCartPrice = cart
+    .map((item) => item.price)
+    .reduce((x, y) => x + y, 0);
+
+  const [totalPrice, setTotalPrice] = useState(totalCartPrice);
 
   return (
     <>
@@ -29,8 +41,22 @@ const CheckoutView = ({ data }: Props) => {
 
             <div className="my-6 md:mt-6">
               {tableData.map((item) => (
-                <CheckOutItems item={item} key={item.id} />
+                <CheckOutItems
+                  item={item}
+                  key={item.id}
+                  // totalPrice={totalPrice}
+                  setTotalPrice={setTotalPrice}
+                />
               ))}
+
+              {!cart.length && (
+                <h2 className="text-center text-blue-900">
+                  Your Cart is Empty.{' '}
+                  <Link className="underline" to="/">
+                    Go Back
+                  </Link>{' '}
+                </h2>
+              )}
             </div>
           </div>
           <div className="">
@@ -38,7 +64,7 @@ const CheckoutView = ({ data }: Props) => {
             <div className="border lg:max-w-lg p-5 grid grid-rows-4">
               <div className="p-5 flex justify-between font-bold md:text-2xl">
                 <p>Subtotal</p>
-                <p>$ 23,20</p>
+                <p>$ {totalPrice.toFixed(2)}</p>
               </div>
               <div className="border-y-2">
                 <div className="my-4 rounded-full border border-gray-300 flex justify-between p-4 cursor-pointer">
@@ -52,9 +78,9 @@ const CheckoutView = ({ data }: Props) => {
                   <DownOutlined />
                 </div>
               </div>
-              <div className="flex justify-between p-4">
+              <div className="flex justify-between p-4 font-bold md:text-2xl">
                 <p>Total Amount</p>
-                <p>$ 23,20</p>
+                <p>$ {totalPrice.toFixed(2)}</p>
               </div>
               <button
                 type="button"

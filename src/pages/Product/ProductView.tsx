@@ -5,14 +5,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Footer } from '@components/Footer';
 import ProductStars from './helpers/ProductStars';
 import { useDispatch } from 'react-redux';
-import { increment } from '@shared/redux/slices/cartSlice';
+import { addToCart } from '@shared/redux/slices/cartSlice';
 import ProductSocial from '@assets/ProductSocial';
+import ProductSize from './helpers/ProductSize';
+import { useState } from 'react';
 
 interface Props {
   data: IProducts;
 }
 
 const ProductView = ({ data }: Props) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [size, setSize] = useState('');
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -103,97 +108,17 @@ const ProductView = ({ data }: Props) => {
                   </details>
 
                   <div className="mt-8 border-t-2 borer-gray-500">
-                    <fieldset className="mt-4">
-                      <legend className="mb-1 text-sm font-medium">Size</legend>
-
-                      <div className="flow-root">
-                        <div className="-m-0.5 flex flex-wrap">
-                          <label
-                            htmlFor="size_xs"
-                            className="cursor-pointer p-0.5"
-                          >
-                            <input
-                              type="radio"
-                              name="size"
-                              id="size_xs"
-                              className="sr-only peer"
-                            />
-
-                            <span className="inline-flex items-center justify-center w-8 h-8 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
-                              XS
-                            </span>
-                          </label>
-
-                          <label
-                            htmlFor="size_s"
-                            className="cursor-pointer p-0.5"
-                          >
-                            <input
-                              type="radio"
-                              name="size"
-                              id="size_s"
-                              className="sr-only peer"
-                            />
-
-                            <span className="inline-flex items-center justify-center w-8 h-8 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
-                              S
-                            </span>
-                          </label>
-
-                          <label
-                            htmlFor="size_m"
-                            className="cursor-pointer p-0.5"
-                          >
-                            <input
-                              type="radio"
-                              name="size"
-                              id="size_m"
-                              className="sr-only peer"
-                            />
-
-                            <span className="inline-flex items-center justify-center w-8 h-8 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
-                              M
-                            </span>
-                          </label>
-
-                          <label
-                            htmlFor="size_l"
-                            className="cursor-pointer p-0.5"
-                          >
-                            <input
-                              type="radio"
-                              name="size"
-                              id="size_l"
-                              className="sr-only peer"
-                            />
-
-                            <span className="inline-flex items-center justify-center w-8 h-8 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
-                              L
-                            </span>
-                          </label>
-
-                          <label
-                            htmlFor="size_xl"
-                            className="cursor-pointer p-0.5"
-                          >
-                            <input
-                              type="radio"
-                              name="size"
-                              id="size_xl"
-                              className="sr-only peer"
-                            />
-
-                            <span className="inline-flex items-center justify-center w-8 h-8 text-xs font-medium border rounded-full group peer-checked:bg-black peer-checked:text-white">
-                              XL
-                            </span>
-                          </label>
-                        </div>
-                      </div>
-                    </fieldset>
+                    {data.category === "men's clothing" && (
+                      <ProductSize setSize={setSize} />
+                    )}
+                    {data.category === "women's clothing" && (
+                      <ProductSize setSize={setSize} />
+                    )}
 
                     <div className="flex mt-4 gap-2">
                       <p className="font-semibold">Quantity:</p>
                       <InputNumber
+                        disabled
                         min={1}
                         max={data.rating.count}
                         defaultValue={1}
@@ -204,7 +129,7 @@ const ProductView = ({ data }: Props) => {
                       <button
                         type="button"
                         className="bg-yellow-500 text-white font-semibold mb-8 rounded-full p-5"
-                        onClick={() => dispatch(increment())}
+                        onClick={() => dispatch(addToCart(data))}
                       >
                         Add to Cart
                       </button>

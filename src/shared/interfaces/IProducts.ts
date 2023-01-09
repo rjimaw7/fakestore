@@ -9,6 +9,7 @@ export interface IProducts {
     rate: number;
     count: number;
   };
+  size?: string;
 }
 
 export interface IProductRequest {

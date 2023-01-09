@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const count = useSelector((state: RootState) => state.cart.value);
+  const cart = useSelector((state: RootState) => state.cart.cart);
 
   return (
     <header aria-label="Site Header" className="bg-blue-900">
@@ -42,9 +42,9 @@ const Navbar = () => {
               <li className="flex gap-2">
                 <CartLogo />
                 <span className="bg-yellow-500 rounded-full w-6 text-center text-sm">
-                  {count}
+                  {cart.length}
                 </span>
-                <a href="/#">Cart</a>
+                <Link to="/checkout">Cart</Link>
               </li>
             </ul>
           </div>

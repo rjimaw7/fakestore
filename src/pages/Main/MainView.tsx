@@ -121,7 +121,7 @@ const MainView = ({
           </div>
         )}
 
-        <div className="mt-12 p-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+        <div className="relative mt-12 p-5 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
           {loading ? (
             <Spin className="absolute top-0 left-0 right-0 bottom-0 m-auto" />
           ) : (
