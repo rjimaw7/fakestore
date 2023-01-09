@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { IProducts } from '@shared/interfaces/IProducts';
-import { Breadcrumb, InputNumber } from 'antd';
+import { Breadcrumb, InputNumber, message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { Footer } from '@components/Footer';
 import ProductStars from './helpers/ProductStars';
@@ -18,6 +18,15 @@ const ProductView = ({ data }: Props) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [size, setSize] = useState('');
 
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const success = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Successfully Added to Cart',
+    });
+  };
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,6 +41,7 @@ const ProductView = ({ data }: Props) => {
 
   return (
     <>
+      {contextHolder}
       <section id="single-product" className="container mx-auto mt-12">
         <div className="mx-20">
           <Breadcrumb className="font-bold">
@@ -129,7 +139,10 @@ const ProductView = ({ data }: Props) => {
                       <button
                         type="button"
                         className="bg-yellow-500 text-white font-semibold mb-8 rounded-full p-5"
-                        onClick={() => dispatch(addToCart(data))}
+                        onClick={() => {
+                          success();
+                          dispatch(addToCart(data));
+                        }}
                       >
                         Add to Cart
                       </button>

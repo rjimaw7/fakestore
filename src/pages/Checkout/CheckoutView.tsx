@@ -3,9 +3,11 @@ import CheckOutItems from './CheckOutItems';
 import { DownOutlined } from '@ant-design/icons';
 import { Footer } from '@components/Footer';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@shared/redux/store';
 import { Link } from 'react-router-dom';
+import { clearCart } from '@shared/redux/slices/cartSlice';
+import { message } from 'antd';
 
 interface Props {
   data: IProducts[];
@@ -15,6 +17,7 @@ const CheckoutView = ({ data }: Props) => {
   const tableData = data;
 
   const cart = useSelector((state: RootState) => state.cart.cart);
+  const dispatch = useDispatch();
 
   const totalCartPrice = cart
     .map((item) => item.price)
@@ -22,8 +25,23 @@ const CheckoutView = ({ data }: Props) => {
 
   const [totalPrice, setTotalPrice] = useState(totalCartPrice);
 
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const successClearedCart = () => {
+    messageApi.open({
+      type: 'success',
+      content: 'Successfully Cleared Cart',
+    });
+  };
+
+  const handleClearCart = () => {
+    successClearedCart();
+    dispatch(clearCart());
+  };
+
   return (
     <>
+      {contextHolder}
       <section
         id="checkout"
         className="mx-auto mt-12 max-w-sm md:max-w-screen-2xl"
@@ -94,12 +112,12 @@ const CheckoutView = ({ data }: Props) => {
 
         {/* <div className="mt-6 block md:flex justify-between md:max-w-screen-lg"> */}
         <div className="mt-6 p-5 md:p-0 md:mb-16 flex flex-col md:max-w-screen-lg md:flex md:flex-row md:justify-evenly lg:justify-between">
-          <button
-            type="button"
+          <Link
+            to="/"
             className="rounded-full bg-yellow-500 text-white p-3 md:p-5 font-semibold text-lg"
           >
             Continue Shopping
-          </button>
+          </Link>
           <button
             type="button"
             className="rounded-full bg-white border border-gray-500 text-gray-500 my-6 md:my-0 p-3 md:p-5 font-semibold text-lg"
@@ -109,6 +127,7 @@ const CheckoutView = ({ data }: Props) => {
           <button
             type="button"
             className="rounded-full bg-white border border-red-500 text-red-500 p-3 md:p-5 font-semibold text-lg"
+            onClick={handleClearCart}
           >
             Clear cart
           </button>
