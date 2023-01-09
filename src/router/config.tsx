@@ -7,7 +7,7 @@ import { CheckoutPage } from '@pages/Checkout';
 
 export const config: RouteObject[] = [
   {
-    path: '/',
+    path: 'https://rjimaw7.github.io/fakestore/',
     element: (
       <Route layout="default">
         <MainPage />
