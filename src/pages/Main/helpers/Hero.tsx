@@ -1,4 +1,4 @@
-import { Row, Col, Carousel } from 'antd';
+import { Carousel } from 'antd';
 import Hero1 from '@assets/Hero1.png';
 import Hero2 from '@assets/Hero2.png';
 import Hero3 from '@assets/Hero3.png';
@@ -15,105 +15,49 @@ const Hero = ({ elementRef }: Props) => {
   };
 
   return (
-    <section id="hero" className="container mx-auto">
-      <Carousel autoplay dotPosition="top">
-        <div>
-          <Row>
-            <Col lg={12} md={24} xs={24}>
-              <div className="lg:mt-24 md:mt-12 md:mx-28">
-                <h2 className="text-4xl mt-4 text-center font-bold text-blue-900 lg:text-left md:text-7xl md:text-center">
-                  White Gold Plated Princess
-                </h2>
+    <section id="hero" className="mx-auto container p-5">
+      {/* <div className="flex flex-col-reverse justify-center items-center"> */}
+      <div className="">
+        <Carousel autoplay dotPosition="top">
+          <div>
+            <img className="w-1/3 mx-auto mt-12" src={Hero1} alt="hero1" />
+            <h2 className="text-3xl font-bold text-blue-900 text-center mt-6">
+              White Gold Plated Princess
+            </h2>
+          </div>
+          <div>
+            <img className="w-1/3 mx-auto" src={Hero2} alt="hero2" />
+            <h2 className="text-3xl font-bold text-blue-900 text-center mt-6">
+              Rain Jacket Women Windbreaker Striped Climbing Raincoats
+            </h2>
+          </div>
+          <div>
+            <img className="w-1/3 mx-auto mt-12" src={Hero3} alt="hero3" />
+            <h2 className="text-3xl font-bold text-blue-900 text-center mt-6">
+              Mens Casual Slim Fit
+            </h2>
+          </div>
+        </Carousel>
+        <div className="">
+          <div className="flex flex-col md:grid md:grid-cols-2 lg:flex lg:justify-center lg:items-center md:gap-4 gap-4 mt-6">
+            <button
+              className=" bg-yellow-500 w-80 md:w-full lg:w-1/2 h-10 rounded-full text-white"
+              type="button"
+              onClick={handleClick}
+            >
+              Shop Now
+            </button>
 
-                <div className="mt-8 flex flex-col gap-4 font-semibold md:flex-row lg:justify-start md:justify-center">
-                  <button
-                    onClick={handleClick}
-                    type="button"
-                    className="rounded-3xl border border-transparent mx-auto w-96 h-12 md:p-5 md:w-32 md:h-16 md:mx-0 bg-yellow-500 text-white"
-                  >
-                    Shop Now
-                  </button>
-                  <button
-                    type="button"
-                    className="rounded-3xl border border-blue-900 mx-auto w-96 h-12 md:p-5 md:w-32 md:h-16 md:mx-0 bg-white text-blue-900"
-                  >
-                    View More
-                  </button>
-                </div>
-              </div>
-            </Col>
-            <Col lg={12} md={24} xs={24}>
-              <div className="w-1/4 mx-auto lg:w-1/2 md:w-1/3 md:mx-auto mt-8">
-                <img className="" src={Hero1} alt="hero1" />
-              </div>
-            </Col>
-          </Row>
+            <button
+              type="button"
+              className=" bg-white w-80 md:w-full lg:w-1/2  h-10 rounded-full text-blue-900 border border-blue-900"
+              onClick={handleClick}
+            >
+              View More
+            </button>
+          </div>
         </div>
-        <div>
-          <Row>
-            <Col lg={12} md={24} xs={24}>
-              <div className="lg:mt-24 md:mt-12 md:mx-28">
-                <h2 className="text-4xl mt-4 text-center font-bold text-blue-900 lg:text-left md:text-7xl md:text-center">
-                  Rain Jacket Women Windbreaker Striped Climbing Raincoats
-                </h2>
-
-                <div className="mt-8 flex flex-col gap-4 font-semibold md:flex-row lg:justify-start md:justify-center">
-                  <button
-                    onClick={handleClick}
-                    type="button"
-                    className="rounded-3xl border border-transparent mx-auto w-96 h-12 md:p-5 md:w-32 md:h-16 md:mx-0 bg-yellow-500 text-white"
-                  >
-                    Shop Now
-                  </button>
-                  <button
-                    type="button"
-                    className="rounded-3xl border border-blue-900 mx-auto w-96 h-12 md:p-5 md:w-32 md:h-16 md:mx-0 bg-white text-blue-900"
-                  >
-                    View More
-                  </button>
-                </div>
-              </div>
-            </Col>
-            <Col lg={12} md={24} xs={24}>
-              <div className="w-1/4 mx-auto lg:w-1/2 md:w-1/3 md:mx-auto mt-8">
-                <img className="" src={Hero2} alt="hero1" />
-              </div>
-            </Col>
-          </Row>
-        </div>
-        <div>
-          <Row>
-            <Col lg={12} md={24} xs={24}>
-              <div className="lg:mt-24 md:mt-12 md:mx-28">
-                <h2 className="text-4xl mt-4 text-center font-bold text-blue-900 lg:text-left md:text-7xl md:text-center">
-                  Mens Casual Slim Fit
-                </h2>
-
-                <div className="mt-8 flex flex-col gap-4 font-semibold md:flex-row lg:justify-start md:justify-center">
-                  <button
-                    onClick={handleClick}
-                    type="button"
-                    className="rounded-3xl border border-transparent mx-auto w-96 h-12 md:p-5 md:w-32 md:h-16 md:mx-0 bg-yellow-500 text-white"
-                  >
-                    Shop Now
-                  </button>
-                  <button
-                    type="button"
-                    className="rounded-3xl border border-blue-900 mx-auto w-96 h-12 md:p-5 md:w-32 md:h-16 md:mx-0 bg-white text-blue-900"
-                  >
-                    View More
-                  </button>
-                </div>
-              </div>
-            </Col>
-            <Col lg={12} md={24} xs={24}>
-              <div className="w-1/4 mx-auto lg:w-1/2 md:w-1/3 md:mx-auto mt-8">
-                <img className="" src={Hero3} alt="hero1" />
-              </div>
-            </Col>
-          </Row>
-        </div>
-      </Carousel>
+      </div>
     </section>
   );
 };
