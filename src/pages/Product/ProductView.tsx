@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { IProducts } from '@shared/interfaces/IProducts';
 import { Breadcrumb, InputNumber } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Footer } from '@components/Footer';
 import ProductStars from './helpers/ProductStars';
 import { useDispatch } from 'react-redux';
@@ -13,10 +13,17 @@ interface Props {
 }
 
 const ProductView = ({ data }: Props) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const truncateString = (string = '', maxLength = 80) =>
     string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
+
+  const handleCheckOut = () => {
+    navigate('/checkout', {
+      state: { data },
+    });
+  };
 
   return (
     <>
@@ -204,6 +211,7 @@ const ProductView = ({ data }: Props) => {
                       <button
                         type="button"
                         className="bg-yellow-500 text-white font-semibold mb-8 rounded-full p-5"
+                        onClick={handleCheckOut}
                       >
                         Buy It Now
                       </button>
